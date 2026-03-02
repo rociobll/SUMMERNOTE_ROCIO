@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Editor Summernote</title>
+
+   <!-- Bootstrap 4 CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+    />
+
+    <!-- Summernote BS4 CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-bs4.min.css"
+    />
+
+  </head>
+
+  <body>
+    <div id="root"></div>
+
+    <!-- jQuery (obligatorio para Summernote) -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+
+    <!-- Forzar jQuery global -->
+<script>
+  window.jQuery = window.$;
+</script>
+
+ <!-- Popper.js (OBLIGATORIO para Bootstrap 4) -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+
+    <!-- Bootstrap 4 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+
+    <!-- Summernote BS4 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-bs4.min.js"></script>
+
+
+    <!-- soprte multi-idioma -->
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/lang/summernote-es-ES.min.js"></script>
+
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
