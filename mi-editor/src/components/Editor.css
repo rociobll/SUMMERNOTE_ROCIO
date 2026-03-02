@@ -1,0 +1,22 @@
+/* contenedor general */
+.note-editor {
+  display: flex;
+  justify-content: center; /* centro horizontal */
+  margin-top: 30px;
+  width: 100%;
+  width: 900px;
+  
+}
+
+/* parte editable */
+.note-editable {
+  min-height: 300px;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+/* barra herramientas */
+.note-toolbar {
+  background-color: #f8f9fa;
+}
+

@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react"
+import './Editor.css'
 
 function Editor() {
   const editorRef = useRef(null)
@@ -9,7 +10,7 @@ function Editor() {
   useEffect(() => {
     // Inicializar Summernote
     $(editorRef.current).summernote({
-      height: 300,       // altura del editor
+      height: 300,
       placeholder: "Escribe aquí...",
       lang: 'es-ES'
     });
@@ -21,6 +22,7 @@ function Editor() {
     };
   }, []);
 
+  
   return <div ref={editorRef}></div>;
 }
 

@@ -1,10 +1,15 @@
-import Editor from "./Editor";
+import Editor from "./components/Editor";
+
 
 function App() {
   return (
-    <div style={{ padding: 20 }}>
-      <h1>Probando Summernote</h1>
-      <Editor />
+    <div className="container editor-container">
+      <div className="row justify-content-center">
+        <h1>SUMMERNOTE - Prueba</h1>
+        <div className= "editor">
+          <Editor />
+        </div>
+      </div>
     </div>
   );
 }
