@@ -4,6 +4,13 @@ import "./Editor.css";
 
 // value para recibir contenido desde App y onchange para mandar contenido a App, y language para soporte multi
 function Editor({ value, onChange, lang }) {
+
+  const placeholders = [
+  { key: "name", label: "Nombre" },
+  { key: "email", label: "Email" },
+  { key: "telefono", label: "Teléfono" },
+];
+
   // useRef para referenciar div del DOm deonde se montará summernote
   const editorRef = useRef(null);
 
@@ -15,7 +22,7 @@ function Editor({ value, onChange, lang }) {
     // Inicializar Summernote
     $(editorRef.current).summernote({
       height: 300,
-      placeholder: "Escriba aquí",
+      placeholder: "Escriba aquí...",
       lang: lang,
       callbacks: {
         onFocus: function () {
@@ -40,13 +47,17 @@ function Editor({ value, onChange, lang }) {
     return () => {
       $(editorRef.current).summernote("destroy")
     };
-  }, [$, lang]);  //cuando cambie idioma se destruye y vuelve a crear otro editor con nuevo idioma
+  }, [ lang ]);  //cuando cambie idioma se destruye y vuelve a crear otro editor con nuevo idioma
 
-  useEffect(() => {
-   if (value !== undefined && editorRef.current) {
+ useEffect(() => {
+  if (!editorRef.current) return;
+
+  const current = $(editorRef.current).summernote("code");
+
+  if (value !== current) {
     $(editorRef.current).summernote("code", value);
-   }
-  }, [$, value]);
+  }
+}, [value]);
 
   // //  cargar contenido en el editor
   // const loadContent = () => {
@@ -58,12 +69,35 @@ function Editor({ value, onChange, lang }) {
   // };
 
   // funcion insertar placeholders en posicion cursor
-  const insertPlaceHolder = (placeholder) => {
-    $(editorRef.current).summernote("insertText", `{${placeholder}}`);
-  };
+const insertPlaceHolder = (placeholder) => {
+  $(editorRef.current).summernote("focus");
+  $(editorRef.current).summernote(
+    "pasteHTML",
+    `{${placeholder}}`
+  );
+};
 
   return (
- 
+ <>
+<select
+  className="form-select w-auto mb-3"
+  onChange={(e) => {
+    if (!e.target.value) return;
+    insertPlaceHolder(e.target.value);
+    e.target.value = "";
+  }}
+>
+  <option value="">Insertar variable...</option>
+
+  {placeholders.map((item) => (
+    <option key={item.key} value={item.key}>
+      {item.label}
+    </option>
+  ))}
+</select>
+
+{/* <div ref={editorRef}></div> */}
+
     <div>
       {/* aqui se monta summernote */}
       <div ref={editorRef}></div>
@@ -93,7 +127,8 @@ function Editor({ value, onChange, lang }) {
         </button>
       </div>
     </div>
-    // </div>
+  
+    </>
   );
 }
 

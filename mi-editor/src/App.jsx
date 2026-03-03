@@ -1,25 +1,26 @@
 import { useState } from "react";
 import Editor from "./components/Editor";
+import { SUPPORTED_LANGUAGES } from "./constants";
 
 // 👇 Datos iniciales (simulan base de datos)
 const initialTemplates = [
   {
     id: 1,
     name: "Bienvenida ES",
-    language: "es-ES",
+    language: SUPPORTED_LANGUAGES.es,
     content: "<p>Hola {name}, bienvenido</p>"
   },
   {
     id: 2,
     name: "Welcome EN",
-    language: "en-US",
+    language: SUPPORTED_LANGUAGES.en,
     content: "<p>Hello {name}, welcome</p>"
   }
 ];
 
 
 function App() {
-  const [lang, setLanguage] = useState('es-ES')
+  const [lang, setLanguage] = useState(SUPPORTED_LANGUAGES.es)
   const [templates, setTemplates] = useState(initialTemplates)
   const [content, setContent] = useState('')
 
@@ -29,6 +30,7 @@ function App() {
       id: templates.length + 1,
       name: "nueva plantilla"
     }
+    setTemplates(newTemplate)
     console.log('Contenido guardado.')
     console.log(content)
    
@@ -40,10 +42,10 @@ function App() {
       <div className="row justify-content-center">
         <h1>SUMMERNOTE - Prueba</h1>
         <div className="editor">
-          {/* le pasamos al componente la funcion setCointent para capturar cambios */}
+          {/* le pasamos al componente la funcion setContent para capturar cambios */}
           <Editor value={content} onChange={setContent} lang={lang} />
 
-          boton para guardar contenido
+          {/* boton para guardar contenido */}
           <button className="btn btn-success mt-4" onClick={saveContent}>
             Guardar contenido
           </button>
@@ -71,10 +73,12 @@ function App() {
           value={lang}
           onChange={(e) => setLanguage(e.target.value)}
         >
-          <option value="es-ES">Español</option>
-          <option value="en-US">English</option>
-          <option value="fr-FR">Francés</option>
-          <option value="it-IT">Italiano</option>
+          <option value={SUPPORTED_LANGUAGES.es}>Español</option>
+          <option value={SUPPORTED_LANGUAGES.en}>English</option>
+          <option value={SUPPORTED_LANGUAGES.fr}>Français</option>
+          <option value={SUPPORTED_LANGUAGES.it}>Italiano</option>
+          <option value={SUPPORTED_LANGUAGES.de}>Deutsch</option>
+
 
         </select>
       </div></>
